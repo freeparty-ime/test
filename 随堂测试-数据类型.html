@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="joXkeTKkAiqCAWDwTJFIiC">
+<head data-page-node-id="r9Iejav97lXAV1mW95L45C">
+<meta charset="UTF-8" data-page-node-id="FyzviFLXBv0e5RyIHEU6O7">
+<meta name="viewport" content="width=device-width, initial-scale=1" data-page-node-id="vPhF2amXNVFyjROJUVEDcA">
+<!-- ===== 替换 1：卷名 ===== -->
+<title>《数据类型及简单函数》随堂测试（交互版）</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f7;color:#1f2937;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;font-size:15px;line-height:1.75}
+.wrap{max-width:940px;margin:0 auto;padding:0 14px 80px}
+header{background:#fff;border-radius:12px;padding:20px 24px;margin:16px 0 12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+h1{font-size:21px;margin:0 0 4px;font-weight:700}
+.sub{color:#6b7280;font-size:13px;margin:0 0 14px}
+.fields{display:flex;gap:10px;flex-wrap:wrap}
+.fields input{flex:1;min-width:110px;padding:8px 12px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;font-family:inherit}
+.fields input:focus{outline:none;border-color:#2563eb}
+.bar{position:sticky;top:0;z-index:9;background:#1e3a8a;color:#fff;border-radius:10px;padding:9px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;font-size:14px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.bar .clock{font-family:Consolas,monospace;font-size:17px;font-weight:700;letter-spacing:.5px}
+.bar.warn{background:#b91c1c}
+.bar button{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit}
+.bar button:hover{background:rgba(255,255,255,.28)}
+h2{font-size:16px;margin:18px 0 10px;padding-left:10px;border-left:4px solid #2563eb;font-weight:700}
+.q{background:#fff;border-radius:12px;padding:14px 20px 16px;margin-bottom:11px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.qhead{display:flex;align-items:baseline;gap:8px}
+.num{background:#2563eb;color:#fff;width:26px;height:26px;line-height:26px;text-align:center;border-radius:7px;font-size:14px;font-weight:700;flex:none}
+.pt{color:#9ca3af;font-size:12px}
+.stem{margin:8px 0 4px}
+.stem p{margin:6px 0}
+.hint{color:#6b7280;font-size:13px;background:#f9fafb;border-radius:6px;padding:6px 10px;margin:6px 0}
+.opt{display:block;padding:7px 12px;margin:6px 0;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;transition:.12s}
+.opt:hover{border-color:#93c5fd;background:#f5f9ff}
+.opt.sel{border-color:#2563eb;background:#eff6ff}
+.opt input{margin-right:8px;vertical-align:middle}
+.opt .lbl{font-weight:700;margin-right:4px}
+.fill{display:flex;align-items:center;gap:10px;margin:10px 0;flex-wrap:wrap}
+.fill .fl{font-size:14px}
+.fill select{font-family:Consolas,monospace;font-size:15px;padding:5px 10px;border-radius:7px;border:1px solid #d1d5db;background:#fff;min-width:100px}
+.fill select:focus{outline:none;border-color:#2563eb}
+table.calc{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;font-family:Consolas,monospace}
+table.calc th,table.calc td{border:1px solid #e5e7eb;padding:5px 4px;text-align:center}
+table.calc th{background:#f3f4f6;font-family:inherit;font-weight:700}
+table.calc td:first-child{background:#f9fafb;font-weight:700;font-family:inherit}
+table.bits{width:100%;border-collapse:collapse;text-align:center;margin:10px 0;font-family:Consolas,monospace;font-size:17px}
+table.bits th,table.bits td{border:1px solid #e5e7eb;padding:7px 4px;font-family:inherit}
+table.bits th{background:#f3f4f6;font-size:13px;font-weight:700;width:70px}
+table.bits td{font-size:19px;font-weight:700}
+table.bits select{font-family:Consolas,monospace;font-size:15px;padding:3px 6px;border-radius:6px;border:1px solid #d1d5db}
+.exp{display:none;margin-top:10px;padding:9px 14px;background:#f0fdf4;border-left:3px solid #16a34a;border-radius:6px;font-size:14px}
+.exp.bad{background:#fef2f2;border-left-color:#dc2626}
+.exp b{color:#111827}
+body.show .exp{display:block}
+.q.right{border-left:4px solid #16a34a}
+.q.wrong{border-left:4px solid #dc2626}
+#submitBox{background:#fff;border-radius:12px;padding:18px 20px;margin-top:16px;box-shadow:0 1px 3px rgba(0,0,0,.08);text-align:center}
+.btn{background:#2563eb;color:#fff;border:none;padding:11px 34px;border-radius:9px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn:hover{background:#1d4ed8}
+.btn:disabled{background:#9ca3af;cursor:not-allowed}
+#result{display:none;background:#fff;border-radius:12px;padding:20px 22px;margin-top:14px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.score{font-size:40px;font-weight:700;color:#1e3a8a;font-family:Consolas,monospace}
+.scorebox{text-align:center;padding:6px 0 14px;border-bottom:1px dashed #e5e7eb;margin-bottom:14px}
+.savebox{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.savebox button{background:#0f766e;color:#fff;border:none;padding:9px 20px;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit}
+.savebox button:hover{background:#115e59}
+.savebox button.gray{background:#6b7280}
+.savebox button.gray:hover{background:#4b5563}
+.note{color:#6b7280;font-size:12.5px;margin-top:14px;text-align:center;line-height:1.7}
+.tip{background:#fffbeb;border:1px solid #fcd34d;border-radius:9px;padding:9px 14px;margin-bottom:12px;font-size:13.5px;color:#78350f}
+.tip button{background:#f59e0b;border:none;color:#fff;padding:3px 12px;border-radius:6px;cursor:pointer;font-size:13px;margin-left:8px;font-family:inherit}
+.err{display:none;color:#b91c1c;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:14.5px;font-weight:700;line-height:1.6;text-align:center}
+.err.show{display:block}
+/* 代码体验区：像一个小代码编辑器 */
+.codewrap{background:#0f172a;border-radius:9px;padding:10px 14px;margin:10px 0;overflow-x:auto;border-left:3px solid #2563eb}
+.codewrap code{background:none;padding:0;color:#e2e8f0;font-family:Consolas,monospace;font-size:14.5px;line-height:1.9;font-weight:600}
+.codewrap code::before{content:"▶ ";color:#64748b;font-weight:400}
+code{font-family:Consolas,monospace;background:#f3f4f6;padding:1px 5px;border-radius:4px;font-size:13.5px}
+.q.sec3{border-left:4px solid #7c3aed}
+.q.sec3 .num{background:#7c3aed}
+</style>
+</head>
+<body data-page-node-id="C326VW1qDhopHvHfHRq8hB">
+<div class="wrap" data-page-node-id="swXGGLWqvj0GrXV4YQFiG9">
+
+<header data-page-node-id="BZjKs0xePlbypA90d0VrTn">
+  <!-- ===== 替换 2：标题与副标题 ===== -->
+  <h1 data-page-node-id="fZPXC9TRo6tVKnVM53yC3m">《数据类型及简单函数》随堂测试</h1>
+  <p class="sub" data-page-node-id="xfUWhJHwTGHOqzKyqdJCSX">高中信息技术 必修1 · 第2章 算法与程序实现 · 2.3.1 数据类型　|　限时 12 分钟　|　满分 100 分　|　15 题　|　全部点选作答，第三部分是"预测程序输出"</p>
+  <div class="fields" data-page-node-id="FZDn4PiAtljTZLOymF1rbp">
+    <input id="f_cls" placeholder="班级（如 高一7班）" autocomplete="off" data-page-node-id="2YpDR14WgHYXkfV7F0zOwT">
+    <input id="f_name" placeholder="姓名（必填）" autocomplete="off" data-page-node-id="0KOfAWMQsDq3Ct3NBIXyee">
+    <input id="f_sid" placeholder="学号（选填）" autocomplete="off" data-page-node-id="vQUmQsybe6uW5xr2c5gJdK">
+  </div>
+</header>
+
+<div class="bar" id="bar" data-page-node-id="JD8GJwO1YfUYodedectjeg">
+  <span data-page-node-id="FUEvRRNkgaHONUQ9PZEtn9">剩余时间 <span class="clock" id="clock" data-page-node-id="BK1Pg1O4aGo4ATScjDIe1u">12:00</span></span>
+  <span id="prog" data-page-node-id="boOYLcnFTeADQlN9Jfj8QV">已答 0 / 3 题</span>
+  <button id="btnReset" data-page-node-id="YXXCfvEvALUabPDOGtmp1T">清空重做</button>
+</div>
+
+<div id="tipbox" data-page-node-id="PLHOT1MHX18xlmPcCe5q3V"></div>
+<div id="paper" data-page-node-id="IW3hVLawfTTx5qHlPwOvtG"></div>
+
+<div id="submitBox" data-page-node-id="Gsz25lSYany2lCR5CYR0df">
+  <button class="btn" id="btnSubmit" data-page-node-id="17j3gFYKF3xGxqlLVMnXJF">提交答卷</button>
+  <div class="err" id="errmsg" data-page-node-id="1uw01Hzd8CneKIQAJrmfu2"></div>
+</div>
+
+<div id="result" data-page-node-id="xb9e9URbRtTcekJyVoIrbu">
+  <div class="scorebox" data-page-node-id="YYq3su1vfvA7xrDLBkaa4u">
+    <div class="score" id="scoreText" data-page-node-id="iXWRzzZgog6jIOTJIsoA1F">0</div>
+    <div id="scoreSub" data-page-node-id="NlBDnXGuF8b2MESliAvQ2q"></div>
+  </div>
+  <div id="detail" data-page-node-id="9rdgAltEPBren96s0PCzja"></div>
+  <div class="savebox" data-page-node-id="VDNj5TQAxyCiufMg0jgUK7">
+    <button id="btnJson" data-page-node-id="R5s4M9a7F6EC4d4TBoyi1u">保存答卷文件（JSON）</button>
+    <button id="btnTxt" data-page-node-id="o5PjX1f5IgJ3N1HWo2HjLW">保存答卷文件（TXT）</button>
+    <button class="gray" id="btnCopy" data-page-node-id="mvyGyy558keoP19pcUe2yY">复制成绩码</button>
+  </div>
+  <div class="note" id="saveNote" data-page-node-id="1Y4HdekzhcMfYGolc3hrGs"></div>
+</div>
+
+</div>
+
+<script id="core">
+const LETTER = 'ABCDEFGH';
+const TOTAL_SEC = 12 * 60;
+/* ===== 替换 3：LS_KEY 每套卷子必须唯一，否则同机多套卷会串数据 ===== */
+const LS_KEY = 'quiz_2_3_1_shujuleixing_v1';
+
+/* ===== 替换 4：题库 =====
+   三种题型：
+   1) type:'choice' 单选/判断 —— opts + ans(正确项原始下标，从 0 起)
+   2) type:'parts'  分步点选 —— subs 混合 select / choice，题干里用 {SUB0} {SUB1} 定位
+   3) 表格里放下拉：把 {SUBn} 写进 <table class="bits"> 的单元格即可
+   干扰项要埋在真实错误上（忘乘声道数、忘 ÷8、没按 1024 换算…）
+*/
+const ITEMS = [
+/* ── 一、判断题：5 题 × 5 分 = 25 分 ─────────────────────── */
+{id:1,sec:'一',type:'choice',score:5,
+ stem:'<code>True</code> 是一个字符串。',
+ opts:['正确','错误'],ans:1,
+ exp:'<b>错误</b>。<code>True</code> 是<b>布尔型（bool）</b>数据，只有 <code>True</code> 和 <code>False</code> 两个值，专门表示"是/否"。<br>布尔型<b>不带引号</b>；写成 <code>"True"</code> 加了引号，那才变成字符串。'},
+
+{id:2,sec:'一',type:'choice',score:5,
+ stem:'<code>16</code> 和 <code>"16"</code> 是同一类型的数据。',
+ opts:['正确','错误'],ans:1,
+ exp:'<b>错误</b>。它们长得一样，类型完全不同：<br>· <code>16</code> 是<b>整型 int</b>，可以参与算术运算（<code>16 + 1</code> → <code>17</code>）；<br>· <code>"16"</code> 是<b>字符串 str</b>，因为加了引号，<code>"16" + 1</code> 会报错。<br>判据：<b>有引号就是字符串</b>。'},
+
+{id:3,sec:'一',type:'choice',score:5,
+ stem:'<code>3.0</code> 的数据类型是浮点型。',
+ opts:['正确','错误'],ans:0,
+ exp:'<b>正确</b>。<b>有没有小数点</b>是区分 int 和 float 的关键：<br>· <code>3</code> 是整型 int；<br>· <code>3.0</code> 虽然数值等于 3，但带了小数点，是<b>浮点型 float</b>。<br>口诀：<b>看小数点，不看数值大小</b>。'},
+
+{id:4,sec:'一',type:'choice',score:5,
+ stem:'列表用一对方括号 <code>[ ]</code> 存放一组数据，元素之间用逗号分隔。',
+ opts:['正确','错误'],ans:0,
+ exp:'<b>正确</b>。列表 list 的写法就是<b>一对方括号 + 逗号分隔</b>，例如 <code>["red", "yellow", "green"]</code>。<br>方括号是列表的"身份证"，看到方括号就想到 list。'},
+
+{id:5,sec:'一',type:'choice',score:5,
+ stem:'学号、邮编、电话号码这类"编号型"数字，用字符串类型更合适。',
+ opts:['正确','错误'],ans:0,
+ exp:'<b>正确</b>。判据是<b>"要不要做算术"</b>：<br>· 学号、邮编、电话号、身份证号<b>从来不参与加减乘除</b>，只是"一串编号"；<br>· 用字符串还能保住<b>前导零</b>（如邮编 <code>"010010"</code>，若用整数会变成 10010，前面的 0 丢了）。<br>项目里的 <code>current_color = "red"</code> 同理——颜色名是文字，不参与运算。'},
+
+/* ── 二、单项选择题：4 题 × 8 分 = 32 分 ────────────────── */
+{id:6,sec:'二',type:'choice',score:7,
+ stem:'下列数据中，类型为<b>整型 int</b> 的是',
+ opts:['<code>"25"</code>','<code>25</code>','<code>25.0</code>','<code>"25.0"</code>'],
+ ans:1,
+ exp:'正确项：<code>25</code>。<br>逐个看：<br>· <code>"25"</code> 有引号 → <b>字符串 str</b>；<br>· <code>25</code> 无引号、无小数点 → <b>整型 int</b> ✔；<br>· <code>25.0</code> 有小数点 → <b>浮点型 float</b>；<br>· <code>"25.0"</code> 有引号 → <b>字符串 str</b>。<br><b>两步判定法：先看引号，再看小数点。</b>'},
+
+{id:7,sec:'二',type:'choice',score:7,
+ stem:'执行 <code>int("3.9")</code> 的结果是',
+ opts:['<code>3</code>','<code>4</code>','<code>3.9</code>','报错'],
+ ans:3,
+ exp:'正确项：<b>报错</b>。<br><code>int()</code> 只能把"<b>整数字面样</b>"的字符串转成整数。<code>"3.9"</code> 里含小数点，<code>int()</code> 不认，会报 <code>invalid literal for int()</code>。<br>要转成功，得<b>先 float 再 int</b>：<code>int(float("3.9"))</code> → <code>3</code>。<br>顺带记牢：<code>int(3.9)</code> → <code>3</code>（<b>截断，不是四舍五入</b>）；想四舍五入要用 <code>round(3.9)</code> → <code>4</code>。'},
+
+{id:8,sec:'二',type:'choice',score:7,
+ stem:'要把字符串 <code>"25"</code> 变成整数，应使用',
+ opts:['<code>str("25")</code>','<code>float("25")</code>','<code>int("25")</code>','<code>len("25")</code>'],
+ ans:2,
+ exp:'正确项：<code>int("25")</code>。<br>三个转换函数<b>各管一个方向</b>：<br>· <code>int(x)</code> → 转成整数；<br>· <code>float(x)</code> → 转成小数（<code>float("25")</code> 得 <code>25.0</code>，不是整数）；<br>· <code>str(x)</code> → 转成字符串，方向<b>正好相反</b>（<code>str(25)</code> 得 <code>"25"</code>）。<br><code>len()</code> 只用来"数一数有几个"，不做类型转换。'},
+
+{id:9,sec:'二',type:'choice',score:7,
+ stem:'红绿灯程序中 <code>lamp_colors = ["red", "yellow", "green"]</code>。<br>下列关于 <code>len(lamp_colors)</code> 与 <code>lamp_colors[0]</code> 的说法正确的是',
+ opts:['<code>len(lamp_colors)</code> 是 3，<code>lamp_colors[0]</code> 是 <code>"red"</code>',
+       '<code>len(lamp_colors)</code> 是 3，<code>lamp_colors[0]</code> 是 <code>"green"</code>',
+       '<code>len(lamp_colors)</code> 是 2，<code>lamp_colors[0]</code> 是 <code>"red"</code>',
+       '<code>len(lamp_colors)</code> 是 3，<code>lamp_colors[1]</code> 是 <code>"red"</code>'],
+ ans:0,
+ exp:'正确项：<b><code>len</code> 是 3，<code>[0]</code> 是 <code>"red"</code></b>。<br>· <code>len()</code> 是"<b>数一数有几个</b>"：列表里有 red、yellow、green 三个元素 → <code>3</code>；<br>· 列表索引<b>从 0 开始数</b>：<code>[0]</code> 是第 1 个 <code>"red"</code>，<code>[1]</code> 是 <code>"yellow"</code>，<code>[2]</code> 才是 <code>"green"</code>。<br>口诀：<b>len 数是量，索引从 0 起。</b>'},
+
+/* ── 三、预测程序输出（像真正跑一次程序）：4 题 × 8 分 = 32 分 ── */
+{id:10,sec:'三',type:'choice',score:8,
+ stem:'<p class="codewrap"><code>a = 15<br>a = a - 1<br>print(a)</code></p>读上面的三行代码，猜猜屏幕上会打印出什么？（想一想，再"运行"你的心算）',
+ opts:['<code>15</code>','<code>14</code>','<code>a - 1</code>','报错'],
+ ans:1,
+ exp:'正确项：<code>14</code>。<br>第 1 行把整数 15 存进变量 <code>a</code>；<br>第 2 行是<b>赋值语句</b>——先算右边 <code>15 - 1 = 14</code>，再把 14 <b>存回</b> <code>a</code>（<b>不是</b>把公式存起来）；<br>第 3 行打印 <code>a</code>，就是 <code>14</code>。<br>这正是红绿灯倒计时每秒在做的事：<code>left = left - 1</code>。<br><b>关键：赋值号"="是"存进去"，不是数学里的"等于"。</b>'},
+
+{id:11,sec:'三',type:'choice',score:8,
+ stem:'<p class="codewrap"><code>print("15" + "3")</code></p>两个带引号的数字用 <code>+</code> 连起来，屏幕上会打印出什么？',
+ opts:['<code>18</code>','<code>153</code>','<code>"15" + "3"</code>','报错'],
+ ans:1,
+ exp:'正确项：<code>153</code>。<br>它们都是<b>字符串</b>，字符串的 <code>+</code> 不是加法，而是<b>拼接</b>：把两串字首尾接起来，就是 <code>"153"</code>（打印时不带引号）。<br>对比记：<code>"15" + "3"</code> → <code>153</code>（拼接）；<code>15 + 3</code> → <code>18</code>（加法）。<br><b>同样的符号，类型不同，含义就不同。</b>'},
+
+{id:12,sec:'三',type:'choice',score:8,
+ stem:'<p class="codewrap"><code>num = "15"<br>print(num + 1)</code></p>这段代码运行后会怎样？',
+ opts:['打印 <code>16</code>','打印 <code>"151"</code>','<b>报错</b>：字符串不能和整数相加','打印 <code>15</code>'],
+ ans:2,
+ exp:'正确项：<b>报错</b>。<br><code>num</code> 是字符串 <code>"15"</code>，字符串<b>只能和字符串拼接</b>，不能和整数 <code>1</code> 相加。<br>Python 的提示是：<code>can only concatenate str (not "int") to str</code>。<br>要让它算成 16，得先转换：<code>int(num) + 1</code> → <code>16</code>。<br><b>这正是"为什么要学转换函数"的最真实理由。</b>'},
+
+{id:13,sec:'三',type:'choice',score:8,
+ stem:'<p class="codewrap"><code>light = "red"<br>print(light == "green")</code></p>屏幕上会打印出什么？（<code>==</code> 是"比较是否相等"）',
+ opts:['<code>red</code>','<code>green</code>','<code>True</code>','<code>False</code>'],
+ ans:3,
+ exp:'正确项：<code>False</code>。<br><code>==</code> 是<b>比较运算</b>，只回答"相等吗"，结果是一个<b>布尔值</b>。<br><code>light</code> 是 <code>"red"</code>，和 <code>"green"</code> 不相等 → 结果是 <code>False</code>（不带引号，是真正的布尔值）。<br>红绿灯程序判断"是否绿灯亮起"用的就是这一招：<code>current_color == "green"</code>。<br><b>一个等号是赋值，两个等号是判断。</b>'},
+
+/* ── 四、材料分析题：2 空 × 11 分 = 22 分（含 1 空代码体验） ── */
+{id:14,sec:'四',type:'parts',score:10,
+ stem:'<p>【项目情境·「编程控灯利出行」】红绿灯演示程序的数据区里有下面两行，请判断每一行数据的类型：</p>'+
+ '<p><code>countdown = 15</code>　→　{SUB0}</p>'+
+ '<p><code>tick = 1.0</code>　→　{SUB1}</p>'+
+ '<p class="hint">想清楚：这个数据<b>要做什么运算</b>，再决定它的类型。</p>',
+ subs:[{type:'select',label:'',opts:['整型 int','浮点型 float','字符串 str','布尔型 bool'],ans:'整型 int',score:5},
+       {type:'select',label:'',opts:['整型 int','浮点型 float','字符串 str','布尔型 bool'],ans:'浮点型 float',score:5}],
+ exp:'① <code>countdown = 15</code> → <b>整型 int</b>：无引号、无小数点，倒计时按整秒做减法。<br>'+
+ '② <code>tick = 1.0</code> → <b>浮点型 float</b>：带了小数点。它是"每秒切成 20 小格"的时间片，必须是小数（<code>1.0 / 20 = 0.05</code> 秒）——若写成整数 <code>1</code>，程序就画不出细腻的倒计时。<br>'+
+ '<b>回头看</b>：一个数据用 int 还是 float，不看它<b>长得像什么</b>，而看它<b>要做什么运算</b>。'},
+
+{id:15,sec:'四',type:'parts',score:5,
+ stem:'<p>【最后一题·动手改一改】红绿灯程序里黄灯现在亮 3 秒（<code>lamp_seconds = [countdown, 3, countdown]</code>）。<br>你想让黄灯亮 <b>5 秒</b>，应该怎么改？</p>'+
+ '<p>改后的那一行是：<code>lamp_seconds = [countdown, {SUB0}, countdown]</code></p>',
+ subs:[{type:'select',label:'',opts:['<code>3</code>（不改）','<code>5</code>','<code>"5"</code>','<code>5.0</code>'],ans:'<code>5</code>',score:5}],
+ exp:'正确项：<code>5</code>。<br>· 秒数要参与"数到 0"的减法运算，必须用<b>整型 int</b>，直接写 <code>5</code>；<br>· 若写成 <code>"5"</code>（字符串）——程序里 <code>left = left - 1</code> 会报错，灯就卡住了；<br>· 若写成 <code>5.0</code>（浮点数）——虽然能算，但倒计时会显示成 <code>5.0 秒</code>，不好看；而且列表元素类型不统一，读起来别扭。<br><b>这就是类型选择的意义：选错类型，程序不是出错，就是行为不对。</b>'}
+];
+
+/* ===== 替换 5：各部分标题与分值说明 ===== */
+const SEC_TITLE = {'一':'一、判断题（共 5 小题，每小题 5 分，共 25 分）—— 点选"正确"或"错误"',
+                   '二':'二、单项选择题（共 4 小题，每小题 7 分，共 28 分）',
+                   '三':'三、预测程序输出（共 4 小题，每小题 8 分，共 32 分）—— 先心算，再点选你会看到的结果',
+                   '四':'四、材料分析题（共 2 题 3 空，共 15 分）—— 点选下拉框'};
+
+function shuffled(n){
+  const a = Array.from({length:n}, (_, i) => i);
+  for (let i = n - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function computeScore(ans, order){
+  let got = 0, total = 0;
+  const det = [];
+  ITEMS.forEach(q => {
+    if (q.type === 'choice'){
+      total += q.score;
+      const v = ans[q.id];
+      const ok = (v !== undefined && v !== null && Number(v) === q.ans);
+      if (ok) got += q.score;
+      det.push({key:q.id, ok:ok, get:ok ? q.score : 0, full:q.score});
+    } else {
+      q.subs.forEach((s, i) => {
+        const key = q.id + '_' + i;
+        total += s.score;
+        const v = ans[key];
+        const ok = (v !== undefined && v !== null && v !== '' && String(v) === String(s.ans));
+        if (ok) got += s.score;
+        det.push({key:key, ok:ok, get:ok ? s.score : 0, full:s.score});
+      });
+    }
+  });
+  return {got:got, total:total, det:det};
+}
+
+function correctLetter(q, ord){
+  const o = ord && ord[q.id] ? ord[q.id] : Array.from({length:q.opts.length}, (_, i) => i);
+  return LETTER[o.indexOf(q.ans)];
+}
+</script>
+
+<script>
+var S = (function(){
+  try {
+    var o = JSON.parse(localStorage.getItem(LS_KEY));
+    if (o && typeof o === 'object' && o.ans) return o;
+  } catch(e){}
+  return {cls:'', name:'', sid:'', ans:{}, order:{}, start:Date.now(), done:false, end:0};
+})();
+if (!S.ans) S.ans = {};
+if (!S.order) S.order = {};
+if (!S.start) S.start = Date.now();
+
+function persist(){ try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch(e){} }
+
+var $ = function(id){ return document.getElementById(id); };
+
+ITEMS.forEach(function(q){
+  if (q.type === 'choice' && !S.order[q.id]) S.order[q.id] = shuffled(q.opts.length);
+});
+
+function optHtml(q, key, oi, di, checked, locked){
+  return '<label class="opt' + (checked ? ' sel' : '') + '">' +
+    '<input type="radio" name="r' + key + '" value="' + oi + '" data-k="' + key + '"' +
+      (checked ? ' checked' : '') + (locked ? ' disabled' : '') + '>' +
+    '<span class="lbl">' + LETTER[di] + '.</span>' + q.opts[oi] + '</label>';
+}
+
+function selHtml(s, key, locked){
+  var v = S.ans[key];
+  var h = '<select data-k="' + key + '"' + (locked ? ' disabled' : '') + '><option value="">— 请选择 —</option>';
+  s.opts.forEach(function(o){
+    h += '<option value="' + o + '"' + (String(v) === String(o) ? ' selected' : '') + '>' + o + '</option>';
+  });
+  return h + '</select>';
+}
+
+function render(){
+  var locked = !!S.done;
+  var html = '', num = 0, cur = '';
+  ITEMS.forEach(function(q){
+    num++;
+    if (q.sec !== cur){ cur = q.sec; html += '<h2>' + SEC_TITLE[cur] + '</h2>'; }
+    var full = q.type === 'choice' ? q.score : q.subs.reduce(function(a, s){ return a + s.score; }, 0);
+    html += '<div class="q' + (q.sec === '三' ? ' sec3' : '') + '" id="q' + q.id + '"><div class="qhead">' +
+      '<span class="num">' + num + '</span><span class="pt">' + full + ' 分</span></div>' +
+      '<div class="stem">';
+    if (q.type === 'choice'){
+      html += '<p>' + q.stem + '</p>';
+      var ord = S.order[q.id] || Array.from({length:q.opts.length}, function(_, i){ return i; });
+      ord.forEach(function(oi, di){
+        var v = S.ans[q.id];
+        html += optHtml(q, q.id, oi, di, v !== undefined && Number(v) === oi, locked);
+      });
+    } else {
+      var subs = {};
+      q.subs.forEach(function(s, i){
+        var key = q.id + '_' + i;
+        subs[i] = s.type === 'choice'
+          ? (function(){
+              var ord = S.order[key] || (S.order[key] = shuffled(s.opts.length));
+              var h = '';
+              ord.forEach(function(oi, di){
+                var v = S.ans[key];
+                h += optHtml({opts:s.opts}, key, oi, di, v !== undefined && Number(v) === oi, locked);
+              });
+              return h;
+            })()
+          : selHtml(s, key, locked);
+      });
+      var stem = q.stem, rest = [];
+      q.subs.forEach(function(s, i){
+        var ph = '{SUB' + i + '}';
+        if (stem.indexOf(ph) >= 0) stem = stem.replace(ph, subs[i]);
+        else rest.push('<div class="fill"><span class="fl">' + s.label + '</span>' + subs[i] + '</div>');
+      });
+      html += stem + rest.join('');
+    }
+    html += '</div><div class="exp"></div></div>';
+  });
+  $('paper').innerHTML = html;
+  var answered = countAnswered();
+  $('prog').textContent = '已答 ' + answered + ' / ' + ITEMS.length + ' 题';
+  if (Object.keys(S.ans).length > 0 && !S.done){
+    $('tipbox').innerHTML = '<div class="tip">检测到未完成的作答记录，已自动为你恢复。<button id="btnResume">继续答题</button></div>';
+    var b = $('btnResume');
+    if (b) b.onclick = function(){ $('tipbox').innerHTML = ''; };
+  }
+  if (S.done) showResult(false);
+}
+
+function countAnswered(){
+  var n = 0;
+  ITEMS.forEach(function(q){
+    if (q.type === 'choice'){ if (S.ans[q.id] !== undefined) n++; }
+    else { if (q.subs.every(function(s, i){ var v = S.ans[q.id + '_' + i]; return v !== undefined && v !== null && v !== ''; })) n++; }
+  });
+  return n;
+}
+
+document.addEventListener('change', function(e){
+  var t = e.target;
+  if (!t.dataset || !t.dataset.k) return;
+  if (t.tagName === 'INPUT') S.ans[t.dataset.k] = Number(t.value);
+  else S.ans[t.dataset.k] = t.value;
+  persist();
+  $('prog').textContent = '已答 ' + countAnswered() + ' / ' + ITEMS.length + ' 题';
+  var box = t.closest('.opt');
+  if (box){
+    box.parentNode.querySelectorAll('.opt').forEach(function(x){ x.classList.remove('sel'); });
+    box.classList.add('sel');
+  }
+});
+
+['cls','name','sid'].forEach(function(k){
+  var el = $('f_' + k);
+  el.value = S[k] || '';
+  el.addEventListener('input', function(){ S[k] = el.value; persist(); });
+});
+
+function fmtDur(ms){
+  var s = Math.max(0, Math.round(ms / 1000));
+  return Math.floor(s / 60) + ' 分 ' + (s % 60) + ' 秒';
+}
+
+function tick(){
+  var left = TOTAL_SEC - Math.floor((Date.now() - S.start) / 1000);
+  if (S.done) left = TOTAL_SEC - Math.floor(((S.end || Date.now()) - S.start) / 1000);
+  if (left < 0) left = 0;
+  var m = Math.floor(left / 60), s = left % 60;
+  $('clock').textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  $('bar').classList.toggle('warn', left <= 60 && !S.done);
+  if (left <= 0 && !S.done){ autoSubmit(); }
+}
+
+var confirmArmed = false, armTimer = null;
+function setErr(html){
+  var e = $('errmsg');
+  e.innerHTML = html;
+  e.className = 'err' + (html ? ' show' : '');
+}
+function armReset(){
+  confirmArmed = false;
+  if (!S.done){
+    $('btnSubmit').textContent = '提交答卷';
+    $('btnSubmit').style.background = '';
+  }
+}
+function doSubmit(){
+  if (S.done) return;
+  if (!S.name || !S.name.trim()){
+    setErr('请先在页面顶部“姓名”栏填写姓名，再点击提交。');
+    $('f_name').scrollIntoView({behavior:'smooth', block:'center'});
+    $('f_name').focus();
+    return;
+  }
+  var un = countAnswered();
+  if (un < ITEMS.length && !confirmArmed){
+    confirmArmed = true;
+    setErr('你还有 <b>' + (ITEMS.length - un) + ' 题</b>未作答（未答题计 0 分）。' +
+      '再点一次红色“确认交卷”按钮即提交；想继续作答可直接去答题。');
+    $('btnSubmit').textContent = '确认交卷';
+    $('btnSubmit').style.background = '#b91c1c';
+    if (armTimer) clearTimeout(armTimer);
+    armTimer = setTimeout(armReset, 15000);
+    return;
+  }
+  if (armTimer) clearTimeout(armTimer);
+  S.done = true;
+  S.end = Date.now();
+  persist();
+  lockAll();
+  showResult(true);
+}
+
+function lockAll(){
+  $('paper').querySelectorAll('input,select').forEach(function(el){ el.disabled = true; });
+  $('f_cls').disabled = true; $('f_name').disabled = true; $('f_sid').disabled = true;
+  $('btnSubmit').disabled = true;
+  $('submitBox').style.display = 'none';
+}
+
+function autoSubmit(){
+  S.done = true; S.end = Date.now(); persist();
+  lockAll();
+  showResult(true);
+}
+
+function showResult(scroll){
+  document.body.classList.add('show');
+  var r = computeScore(S.ans, S.order);
+  $('result').style.display = 'block';
+  $('scoreText').textContent = r.got;
+  $('scoreSub').innerHTML = '满分 ' + r.total + ' 分　|　' + (S.name || '未填写姓名') + '　|　用时 ' + fmtDur((S.end || Date.now()) - S.start);
+  var lines = [];
+  var num = 0;
+  ITEMS.forEach(function(q){
+    num++;
+    var el = $('q' + q.id);
+    var qok = true;
+    if (q.type === 'choice'){
+      var v = S.ans[q.id];
+      var ok = v !== undefined && Number(v) === q.ans;
+      qok = ok;
+      var ord = S.order[q.id];
+      var myL = v === undefined ? '未作答' : LETTER[ord.indexOf(Number(v))];
+      lines.push('<div>第 ' + num + ' 题：<b style="color:' + (ok ? '#15803d' : '#b91c1c') + '">' +
+        (ok ? '正确 +' + q.score : '错误 +0') + '</b>　你的答案 ' + myL + '　正确答案 ' + correctLetter(q, S.order) + '</div>');
+      el.classList.add(ok ? 'right' : 'wrong');
+      el.querySelector('.exp').innerHTML = '<div><b>正确答案：' + correctLetter(q, S.order) + '</b>　' +
+        (v === undefined ? '（你未作答）' : '（你的答案：' + myL + '）') + '</div>' + q.exp;
+      el.querySelector('.exp').className = 'exp' + (ok ? '' : ' bad');
+    } else {
+      var gs = 0, fs = 0;
+      q.subs.forEach(function(s, i){
+        var key = q.id + '_' + i;
+        var v = S.ans[key];
+        var ok = v !== undefined && v !== null && v !== '' && String(v) === String(s.ans);
+        if (!ok) qok = false;
+        gs += ok ? s.score : 0; fs += s.score;
+      });
+      lines.push('<div>第 ' + num + ' 题：<b style="color:' + (qok ? '#15803d' : '#b91c1c') + '">' +
+        (qok ? '正确 +' + fs : '得到 ' + gs + ' / ' + fs) + '</b></div>');
+      el.classList.add(qok ? 'right' : 'wrong');
+      el.querySelector('.exp').innerHTML = q.exp;
+      el.querySelector('.exp').className = 'exp' + (qok ? '' : ' bad');
+    }
+  });
+  $('detail').innerHTML = lines.join('');
+  $('saveNote').innerHTML = '提交后答案已锁定。请点击上方按钮保存答卷文件——会弹出“另存为”窗口，你可以选择保存到 D 盘作业文件夹或教师指定的共享目录。<br>' +
+    '若浏览器不支持选择保存位置（如 Firefox），文件会自动下载到“下载”文件夹。';
+  if (scroll) $('result').scrollIntoView({behavior:'smooth'});
+  LAST = r;
+}
+
+var LAST = null;
+
+function buildObj(){
+  var r = LAST || computeScore(S.ans, S.order);
+  var d = new Date();
+  var pad = function(n){ return n < 10 ? '0' + n : '' + n; };
+  var stamp = d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '-' + pad(d.getHours()) + pad(d.getMinutes());
+  var rows = [];
+  var num = 0;
+  ITEMS.forEach(function(q){
+    num++;
+    if (q.type === 'choice'){
+      var v = S.ans[q.id];
+      var ord = S.order[q.id];
+      rows.push({no:num, type:'choice', stem:q.stem.replace(/<[^>]+>/g, ''),
+        yourAnswer: v === undefined ? '' : LETTER[ord.indexOf(Number(v))],
+        correctAnswer: correctLetter(q, S.order),
+        score: (v !== undefined && Number(v) === q.ans) ? q.score : 0, full: q.score});
+    } else {
+      q.subs.forEach(function(s, i){
+        var key = q.id + '_' + i;
+        var v = S.ans[key];
+        var ok = v !== undefined && v !== null && v !== '' && String(v) === String(s.ans);
+        rows.push({no:num, type:'fill', stem:'第 ' + num + ' 题第 ' + (i + 1) + ' 空',
+          yourAnswer: v === undefined ? '' : String(v), correctAnswer: String(s.ans),
+          score: ok ? s.score : 0, full: s.score});
+      });
+    }
+  });
+  /* 注意：必须显式打包成数组返回。写成 return {..}, stamp 是逗号表达式，只会返回 stamp！ */
+  var obj = {
+    title: document.title,
+    student: {class: S.cls || '', name: S.name || '', sid: S.sid || ''},
+    submittedAt: d.toLocaleString('zh-CN'),
+    usedTime: fmtDur((S.end || Date.now()) - S.start),
+    overtime: (S.end ? (S.end - S.start) : 0) > TOTAL_SEC * 1000,
+    score: r.got, total: r.total, rows: rows
+  };
+  return [obj, stamp];
+}
+
+function buildTxt(o){
+  var t = '《' + o.title + '》答卷\n';
+  t += '班级：' + o.student.class + '　姓名：' + o.student.name + '　学号：' + o.student.sid + '\n';
+  t += '提交时间：' + o.submittedAt + '　用时：' + o.usedTime + (o.overtime ? '（超时）' : '') + '\n';
+  t += '总分：' + o.score + ' / ' + o.total + '\n';
+  t += '----------------------------------------\n';
+  var seen = {};
+  o.rows.forEach(function(r){
+    if (seen[r.no]) return; seen[r.no] = 1;
+    var same = o.rows.filter(function(x){ return x.no === r.no; });
+    var g = 0, f = 0;
+    same.forEach(function(x){ g += x.score; f += x.full; });
+    t += '第' + r.no + '题  得分 ' + g + '/' + f + '\n';
+    same.forEach(function(x){
+      t += '     作答：' + (x.yourAnswer || '（空）') + '　正确答案：' + x.correctAnswer + '　(' + x.score + '/' + x.full + ')\n';
+    });
+  });
+  return t;
+}
+
+function safeName(s){ return String(s || '').replace(/[\\/:*?"<>|]/g, '_').trim(); }
+
+function fileName(o, stamp, ext){
+  return [safeName(o.student.sid) || '无学号', safeName(o.student.name) || '未署名', o.score + '分', stamp].join('_') + ext;
+}
+
+/* 保存：优先弹“另存为”让用户选文件夹 → 不支持则自动下载 → 页面另有“复制成绩码”兜底 */
+function saveAs(content, suggested, mime, ext){
+  var note = $('saveNote');
+  if (window.showSaveFilePicker){
+    return window.showSaveFilePicker({
+      suggestedName: suggested,
+      types: [{description: '答卷文件', accept: (function(){ var m = {}; m[mime] = [ext]; return m; })()}]
+    }).then(function(h){
+      return h.createWritable().then(function(w){
+        return w.write(content).then(function(){ return w.close(); });
+      });
+    }).then(function(){
+      note.innerHTML = '<b style="color:#15803d">答卷已保存：' + suggested + '</b>';
+      return true;
+    }).catch(function(e){
+      if (e && e.name === 'AbortError'){ note.textContent = '已取消保存，你可以再次点击保存按钮。'; return false; }
+      return fallbackDownload(content, suggested, mime, note);
+    });
+  }
+  return Promise.resolve(fallbackDownload(content, suggested, mime, note));
+}
+
+function fallbackDownload(content, suggested, mime, note){
+  var blob = new Blob([content], {type: mime + ';charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = suggested;
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 3000);
+  note.innerHTML = '当前浏览器不支持“选择保存位置”，文件已直接下载：<b>' + suggested + '</b>（通常在“下载”文件夹中）';
+  return true;
+}
+
+$('btnJson').onclick = function(){
+  var r = buildObj(), o = r[0], stamp = r[1];
+  saveAs(JSON.stringify(o, null, 2), fileName(o, stamp, '.json'), 'application/json', '.json');
+};
+$('btnTxt').onclick = function(){
+  var r = buildObj(), o = r[0], stamp = r[1];
+  saveAs(buildTxt(o), fileName(o, stamp, '.txt'), 'text/plain', '.txt');
+};
+$('btnCopy').onclick = function(){
+  var r = buildObj(), o = r[0];
+  var code = btoa(unescape(encodeURIComponent(JSON.stringify({n:o.student.name, s:o.student.sid, c:o.student.class, sc:o.score, t:o.usedTime, r:o.rows.map(function(x){ return x.score; })}))));
+  var ta = document.createElement('textarea');
+  ta.value = code; document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); $('saveNote').innerHTML = '<b style="color:#15803d">成绩码已复制到剪贴板，粘贴给老师即可。</b>'; }
+  catch(e){ $('saveNote').textContent = '复制失败，请手动选中下方文本：' + code; }
+  ta.remove();
+};
+
+$('btnSubmit').onclick = doSubmit;
+$('btnReset').onclick = function(){
+  if (!confirm('确定要清空所有作答并重新开始吗？此操作不可恢复。')) return;
+  localStorage.removeItem(LS_KEY);
+  location.reload();
+};
+
+render();
+tick();
+setInterval(tick, 500);
+</script>
+</body>
+</html>
